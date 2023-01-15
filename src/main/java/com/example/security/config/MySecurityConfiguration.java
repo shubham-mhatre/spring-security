@@ -22,7 +22,9 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter{
 		//in postmane => in request, go to authentication tab, add username and password (generated at console) and hit api
 		//it will not have logout functionality
 		http.authorizeRequests()
-		.antMatchers("/public/**").permitAll() //only public url are permit without authentication.
+		//.antMatchers("/public/**").permitAll() //only public url are permit without authentication.
+		.antMatchers("/public/**").hasRole("Normal")//public url for normal users
+		.antMatchers("/user/**").hasRole("Admin")//user url for Admin user.
 		.anyRequest()
 		.authenticated()
 		.and()
