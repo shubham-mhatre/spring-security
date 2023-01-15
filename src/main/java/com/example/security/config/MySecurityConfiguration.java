@@ -21,7 +21,9 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter{
 		//form based authentication is changed with popup/alert type of authentication in chrome for get request
 		//in postmane => in request, go to authentication tab, add username and password (generated at console) and hit api
 		//it will not have logout functionality
-		http.authorizeRequests()
+		http
+		.csrf().disable()//for post, put, delete etc request we need to add csrf as false.
+		.authorizeRequests()
 		//.antMatchers("/public/**").permitAll() //only public url are permit without authentication.
 		.antMatchers("/public/**").hasRole("Normal")//public url for normal users
 		.antMatchers("/user/**").hasRole("Admin")//user url for Admin user.
